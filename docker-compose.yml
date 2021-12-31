@@ -30,8 +30,10 @@ services:
     networks:
       - docker-laravel
   mysql:
-    image: mysql:5.7.22
+    image: amd64/mysql:5.7.36
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
+    platform: linux/arm64
     ports:
       - 3306:3306
     volumes:
