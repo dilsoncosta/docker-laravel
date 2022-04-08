@@ -6,19 +6,31 @@ ARG uid
 
 # Instale dependências do sistema
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libbz2-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    build-essential \
+    mariadb-client \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    libzip-dev \
     zip \
-    unzip
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libxml++2.6-dev
 
 # Limpar cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instale extensões PHP
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets xml zip
 
 # Obtenha o compositor mais recente
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
